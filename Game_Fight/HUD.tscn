@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://8vbdgta6t018"]
+
+[ext_resource type="Script" uid="uid://qoffbh64pbsr" path="res://canvas_layer.gd" id="1_efote"]
+[ext_resource type="Texture2D" uid="uid://clukyylqh7502" path="res://Images/Barra de vida Full.png" id="2_vow1y"]
+[ext_resource type="Texture2D" uid="uid://c2mh7mg6jhm02" path="res://Images/Dead.png" id="3_vow1y"]
+
+[sub_resource type="Animation" id="Animation_ne771"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_vow1y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_xxqia"]
+resource_name = "beat"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_vow1y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.08849862, 0.18067493, 0.26672179, 0.35522032, 0.4412672, 0.52731407, 0.6182645, 0.7055371),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_gv1iq"]
+resource_name = "dead"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_vow1y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gv1iq"]
+_data = {
+&"RESET": SubResource("Animation_ne771"),
+&"beat": SubResource("Animation_xxqia"),
+&"dead": SubResource("Animation_gv1iq")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1898095697]
+script = ExtResource("1_efote")
+
+[node name="Control" type="Control" parent="." unique_id=1745926643]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = -48.0
+offset_right = 130.0
+offset_bottom = -8.0
+grow_vertical = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control" unique_id=795267606]
+libraries/ = SubResource("AnimationLibrary_gv1iq")
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control" unique_id=1202850266]
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control" unique_id=851093942]
+scale = Vector2(4, 4)
+texture = ExtResource("2_vow1y")
+hframes = 6
+
+[node name="StaminaBar" type="TextureProgressBar" parent="Control" unique_id=375113647]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ShieldBar" type="TextureProgressBar" parent="Control" unique_id=1051648192]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthLabel" type="Label" parent="Control" unique_id=1391772840]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="StaminaLabel" type="Label" parent="Control" unique_id=1380754972]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
